@@ -1,0 +1,194 @@
+# SPEACE Digital Brain — Central Configuration
+# Energy-optimized for Gaming Laptop (RTX 3060 6GB, 16GB RAM, Intel i9)
+
+system:
+  name: "SPEACE Digital Brain"
+  version: "1.0.0-unified"
+  language: "it"
+  data_dir: "data"
+  backup_dir: "data/backups"
+  log_dir: "logs"
+
+# ── Energy Budget (RTX 3060 Laptop) ──
+energy:
+  gpu_vram_limit_mb: 4096       # Max 4GB of 6GB
+  ram_limit_mb: 8192            # Max 8GB of 16GB
+  target_gpu_power_w: 50        # Average, TDP is 115W
+  batch_embeddings: true        # Batch embed, never one-at-a-time
+  lazy_module_loading: true     # Only load what fires
+  aggressive_pruning: true      # Keep memory stores lean
+  max_concurrent_llm_calls: 2   # Limit parallel LLM requests
+
+# ── Circadian Rhythm (Sleep-Wake) ──
+circadian:
+  active_phase_minutes: 16      # Full processing
+  consolidation_phase_minutes: 4 # Memory replay, pruning, reindexing
+  deep_consolidation_hour: 3    # 3:00 AM system time = deep maintenance
+
+# ── LLM Cascade Routing ──
+llm:
+  primary:
+    provider: "ollama"
+    model: "gemma3:4b"          # Fast, efficient for laptop
+    temperature: 0.65
+    max_tokens: 512
+  secondary:
+    provider: "ollama"
+    model: "qwen3:4b"
+    temperature: 0.4
+    max_tokens: 256
+  cloud_fallback:
+    provider: "anthropic"
+    model: "claude-haiku-4-5-20251001"
+    temperature: 0.5
+    max_tokens: 1024
+    require_approval: true       # Human must approve cloud calls
+  embeddings:
+    provider: "ollama"
+    model: "nomic-embed-text"
+    dimensions: 768
+    fallback: "hash_deterministic"
+
+# ── Memory System ──
+memory:
+  working:
+    max_turns: 20
+    chunk_size: 7               # Miller's law ±2
+  factual:
+    persist_file: "data/factual_memory.json"
+    fuzzy_match_threshold: 0.6
+  episodic:
+    persist_file: "data/episodic_memory.jsonl"
+    max_events: 500
+    importance_decay: 0.95      # Per consolidation cycle
+  semantic:
+    persist_dir: "data/vector_store"
+    max_items: 10000
+    index_type: "flat_l2"       # Simple for laptop; use "ivf" for scale
+  consolidation:
+    replay_ratio: 0.3           # Replay 30% of recent memories per cycle
+    strengthen_factor: 1.2      # Boost replayed memories
+    prune_below_importance: 0.1
+
+# ── Neuromodulation Parameters ──
+neuromodulation:
+  dopamine:
+    initial: 0.5                # Reward/learning rate
+    boost_on_reward: 0.15
+    decay_per_cycle: 0.02
+  norepinephrine:
+    initial: 0.55               # Attention/arousal
+    boost_on_surprise: 0.20
+    decay_per_cycle: 0.03
+  acetylcholine:
+    initial: 0.60               # Memory encoding precision
+    boost_on_novelty: 0.15
+    decay_per_cycle: 0.01
+  serotonin:
+    initial: 0.50               # Patience, explore vs exploit
+    boost_on_coherence: 0.10
+    decay_per_cycle: 0.01
+
+# ── Criticality ──
+criticality:
+  target_branching_ratio: 1.0   # Power-law avalanche sweet spot
+  lower_bound: 0.6              # Below = sub-critical (rigid)
+  upper_bound: 1.4              # Above = super-critical (chaotic)
+  intervention_gain: 0.1        # Correction strength per cycle
+
+# ── Brain Regions ──
+brain_regions:
+  hemispheres:
+    left_model: "qwen3:4b"
+    left_temperature: 0.4
+    right_model: "gemma3:4b"
+    right_temperature: 0.85
+    corpus_callosum_temperature: 0.6
+  frontal:
+    executive_model: "gemma3:4b"
+    broca_model: "qwen3:4b"
+  temporal:
+    pattern_model: "qwen3:4b"
+  default_mode:
+    reflection_temperature: 0.8
+    rumination_cycles: 3
+
+# ── Cognitive Systems ──
+cognitive:
+  attention:
+    ucb1_exploration_weight: 2.0
+    salience_threshold: 0.3
+    max_focus_modules: 5
+  predictive_coding:
+    prediction_horizon: 3       # Steps ahead
+    error_threshold: 0.15       # Below this, suppress propagation
+    learning_rate: 0.05         # Update rate for prediction weights
+  consciousness:
+    gwt_activation_threshold: 0.5
+    phi_calculation_depth: 3
+    broadcast_interval_ms: 100
+
+# ── Evolution ──
+evolution:
+  digital_dna:
+    persist_file: "data/digital_dna.json"
+    min_fitness_for_mutation: 0.65
+    max_mutations_per_cycle: 3
+  mutation_lab:
+    backup_before_mutate: true
+    validate_with_ast: true
+    rollback_on_failure: true
+    allowed_mutation_types:
+      - "parameter_tuning"
+      - "comment_annotation"
+      - "import_cleanup"
+    prohibited_mutation_types:
+      - "core_logic_change"
+      - "safety_bypass"
+      - "auto_execute_external"
+
+# ── Safety ──
+safety:
+  safeproactive:
+    wal_enabled: true
+    approval_gates:
+      low: "auto_approve"
+      medium: "human_required"
+      high: "human_with_timeout"
+      regulatory: "dual_review"
+    max_snapshots: 20
+  ethical:
+    constitution_version: "1.0"
+    hard_locks:
+      - "no_self_replication_without_approval"
+      - "no_financial_transactions"
+      - "no_external_network_attacks"
+      - "no_personal_data_exfiltration"
+
+# ── Swarm ──
+swarm:
+  agents:
+    planner: { model: "qwen3:4b", temperature: 0.4 }
+    executor: { model: "qwen3:4b", temperature: 0.3 }
+    critic: { model: "gemma3:4b", temperature: 0.5 }
+    reflector: { model: "gemma3:4b", temperature: 0.7 }
+  max_debate_rounds: 3
+  consensus_threshold: 0.6
+
+# ── Monitoring ──
+monitoring:
+  metrics:
+    history_window: 5
+    emergence_weights:
+      novelty: 0.20
+      coherence: 0.25
+      adaptation: 0.15
+      memory_continuity: 0.20
+      self_generated_goals: 0.20
+  dashboard:
+    port: 8765
+    update_interval_seconds: 2
+  energy_monitor:
+    sample_interval_seconds: 10
+    alert_on_gpu_exceed: 70     # Watts
+    alert_on_ram_exceed_mb: 7000

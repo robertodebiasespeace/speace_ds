@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# Virtualenv
+venv/
+.venv/
+env/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# Data (runtime state)
+data/state_bus.json
+data/vector_store/
+data/digital_dna.json
+data/episodic_memory.jsonl
+
+# Claude Code local config
+.claude/settings.local.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
