@@ -51,17 +51,26 @@ Repository = "https://github.com/robertodebiasespeace/speace_ds"
 Issues = "https://github.com/robertodebiasespeace/speace_ds/issues"
 
 [tool.setuptools]
-py-modules = ["speace_brain"]
 packages = [
-    "core", "brain", "cognitive", "memory", "learning",
-    "evolution", "neuromodulation", "llm", "agency", "safety",
-    "swarm", "monitoring", "config", "docs", "tests",
+    "core",
+    "brain",
+    "cognitive",
+    "memory",
+    "learning",
+    "evolution",
+    "neuromodulation",
+    "llm",
+    "agency",
+    "safety",
+    "swarm",
+    "monitoring",
+    "config",
 ]
+
+[tool.setuptools.package-data]
+config = ["settings.yaml"]
 
 [tool.pytest.ini_options]
 minversion = "7.0"
 asyncio_mode = "auto"
 testpaths = ["tests"]
-
-[tool.setuptools.package-data]
-config = ["settings.yaml"]
